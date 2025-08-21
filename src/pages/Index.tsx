@@ -1,11 +1,28 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { AuditForm, AuditResults } from '@/components/AuditForm';
+import { AuditReport } from '@/components/AuditReport';
 
 const Index = () => {
+  const [auditResults, setAuditResults] = useState<AuditResults | null>(null);
+
+  const handleAuditComplete = (results: AuditResults) => {
+    setAuditResults(results);
+  };
+
+  const handleNewAudit = () => {
+    setAuditResults(null);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8">
+        {!auditResults ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <AuditForm onAuditComplete={handleAuditComplete} />
+          </div>
+        ) : (
+          <AuditReport results={auditResults} onNewAudit={handleNewAudit} />
+        )}
       </div>
     </div>
   );
