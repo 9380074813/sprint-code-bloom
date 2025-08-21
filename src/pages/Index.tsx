@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { AuditForm, AuditResults } from '@/components/AuditForm';
-import { AuditReport } from '@/components/AuditReport';
+import { AuditResults } from '@/components/AuditForm';
+import { EnhancedAuditForm } from '@/components/advanced/EnhancedAuditForm';
+import { AuditDashboard } from '@/components/advanced/AuditDashboard';
 
 const Index = () => {
   const [auditResults, setAuditResults] = useState<AuditResults | null>(null);
@@ -18,10 +19,10 @@ const Index = () => {
       <div className="container mx-auto px-4 py-8">
         {!auditResults ? (
           <div className="flex items-center justify-center min-h-screen">
-            <AuditForm onAuditComplete={handleAuditComplete} />
+            <EnhancedAuditForm onAuditComplete={handleAuditComplete} />
           </div>
         ) : (
-          <AuditReport results={auditResults} onNewAudit={handleNewAudit} />
+          <AuditDashboard results={auditResults} onNewAudit={handleNewAudit} />
         )}
       </div>
     </div>
